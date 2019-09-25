@@ -4,7 +4,7 @@ $white: #fff;
 
 body{
   padding-top:20px;
-  font-family:Roboto, sans-serif;
+  font-family:"Lucida Console", Monaco, monospace;
   text-align:center;
   background:#fff;
   color:#222;
@@ -21,7 +21,7 @@ body{
 }
 
 .mono{
-  font-family:"Cutive Mono", monospace;
+  font-family:"Lucida Console", Monaco, monospace;
 }
 
 .wrong{
@@ -87,7 +87,7 @@ hr{
     animation:        cursor_flash .5s infinite;
   }
   &:before{
-    font-family:Roboto;
+    font-family:"Lucida Console", Monaco, monospace;
     top:0;
     left:0;
     right:0;
@@ -169,7 +169,7 @@ textarea{
 }
 
 .results{
-  font-family:Roboto;
+  font-family:"Lucida Console", Monaco, monospace;
 }
 
 .settings{
@@ -179,7 +179,7 @@ textarea{
   right:0;
   padding:3px 6px 6px;
   background:#444;
-  font-family:Roboto, sans-serif;
+  font-family:"Lucida Console", Monaco, monospace;
   color:#999;
   text-align:left;
   text-shadow:0 0 6px rgba(0,0,0,0.6);
@@ -192,13 +192,5 @@ textarea{
     &:hover{
       color:#ccf;
     }
-  }
-}
-
-.twitter a{
-  color:rgba(255,0,0,0.7);
-  text-decoration:none;
-  &:hover{
-    text-decoration:underline;
   }
 }
