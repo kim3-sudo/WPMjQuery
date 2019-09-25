@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<canvas id="canvas" width="450" height="450"></canvas>
-<script src="script.js" type="text/javascript"></script>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Snake</title>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-</head>
-<body>
-	document.getElementById("script.js").style.display = "block";
-	<div id="output" class="output">
-		<iframe id="docCanvas" class="one" src="script.js" width="1000" height="800"></iframe>
-	</div>
-</body>
+<link href='https://fonts.googleapis.com/css?family=Cutive+Mono|Roboto:400,900,700' rel='stylesheet' type='text/css'/>
+<p id="focus">Click this window to give it focus (Start typing with a capital S!)</p>
+<h1 id="output"></h1>
+<div class="target mono" id="target"></div>
+<div id="your-attempt" class="mono your-attempt" placeholder="Your text will appear here"></div>
+<p class="twitter">Tweet your highest words per minute @ us! <a href="https://twitter.com/EightArmsHQ" target="_blank">https://twitter.com/EightArmsHQ</a></p>
+<div class="results">
+  <ul class="stats">
+    <li>Words per minute <span id="wpm">0</span></li>
+    <li>Wordcount <span id="wordcount">0</span></li>
+    <li>Timer <span id="timer">0</span></li>
+    <li>Errors <span id="errors">0</span></li>
+  </ul>
+</div>
+<hr style="clear:both;" />
+<div>
+<textarea name="" id="input_text" cols="30" rows="10">Suddenly quite near him there was a rifle shot. He heard the crack and smack and whistling ricochet among the rocks behind him. He dropped his torch and began feebly to trot.</textarea>
+</div>
+<div class="settings">
+  <a href="#" id="reset">Reset</a> | <a href="#" id="change">Change text</a> | <a href="#" id="pause">Pause II</a>
+</div>
