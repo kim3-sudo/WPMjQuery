@@ -50,9 +50,9 @@ $(document).ready(function() {
 
 		// console.log("No errors present: " + correctAll);
 		if(correctAll) {
-			$wpmErrorAll.html("You're doing well." + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
+			$wpmErrorAll.html("Good so far..." + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
 		} else if(!correctAll) {
-			$wpmErrorAll.html("Oh, no. There's an error somewhere."  + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
+			$wpmErrorAll.html("Oops! You made an error!"  + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
 		};
 	});
 
