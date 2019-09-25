@@ -16,8 +16,17 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    $( "#draggable" ).draggable({ helper: "original" });
-    $( "#draggable2" ).draggable({ opacity: 0.7, helper: "clone" });
+    $( "#draggable" ).draggable({
+      helper: "original",
+      cursor: "move",
+      cursorAt: {top:56, left:56}
+    });
+    $( "#draggable2" ).draggable({
+      opacity: 0.7,
+      helper: "clone",
+      cursor: "crosshair",
+      cursorAt: { top: -5, left: -5}
+    });
     $( "#draggable3" ).draggable({
       cursor: "move",
       cursorAt: { top: -12, left: -20 },
