@@ -87,47 +87,4 @@ $(document).ready(function() {
 			shiftMovesLeft = 0;
 		};
 	});
-	$wpmTest.keyup(function(e) {
-		// shift + left arrow key
-		if(keyLog[16] && keyLog[37] && (position >= -1)) {
-			shiftMovesLeft++;
-		}
-
-		// shift + right arrow key
-		if(keyLog[16] && keyLog[39] && ($wpmTestLog.length - 1)) {
-			shiftMovesRight++;
-		}
-
-		// if keyCount === 1, begin timer
-		if(keyCount === 1) {
-			timeStart = Date.now();
-		};
-
-		// on enter: complete at end
-		if(keyLog[13] && ($wpmPromptLog.length >= $wpmPromptLength)) {
-			var elapsed = (Date.now() - timeStart) / 1000;
-			$wpmTest.attr("disabled", "disabled");
-
-			function wpm() {
-				var wpmUnadjustedRaw = ($wpmPromptLength / 5) * (60 / elapsed);
-				var wpmUnadjusted = wpmUnadjustedRaw.toFixed(1);
-				return wpmUnadjusted;
-			};
-
-			function wpmNet() {
-				var wpmAdjustedRaw = (($wpmPromptLength - errorCount) / 5) * (60 / elapsed);
-				var wpmAdjusted = wpmAdjustedRaw.toFixed(1);
-				return wpmAdjusted;
-			};
-
-			if(wpm() !== wpmNet()) {
-				alert("You've completed the test with a WPM of " + wpm() + " (adjusted to " + wpmNet() + ").");
-			} else {
-				alert("You've completed the test with a WPM of " + wpm() + ".");
-			}
-		}
-
-		// on keyup, remove key from array
-		keyLog[e.which] = false;
-	});
 });
