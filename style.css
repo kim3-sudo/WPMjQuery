@@ -1,6 +1,6 @@
 $yellow: #2222ff;
-$red: #99f;
-$white: #fff;
+$red: #99ffff;
+$white: #ffffff;
 
 body{
   padding-top:20px;
@@ -9,7 +9,6 @@ body{
   background:#fff;
   color:#222;
   padding-bottom:40px;
-  background: url(https://djave.co.uk/hosted/subtlepatterns/lightpaperfibers.png);
 }
 
 #focus{
