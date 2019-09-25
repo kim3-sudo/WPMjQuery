@@ -2,27 +2,8 @@
 	box-sizing: border-box;
 }
 
-.contains-btn {
-	text-align: left;
-}
-
-.btn {
-	display: inline-block;
-	text-align: left;
-	color: #ffffff;
-	border: 1px solid #ffffff;
-	padding: 0.5rem 1.5rem;
-	margin: 0.15rem;
-	transition-duration: 1.5s;
-}
-
 .btn-third {
 	margin-top: .35rem;
-}
-
-.btn:hover,
-.btn:focus {
-	transition-duration: 0.5s;
 }
 
 .lead-in {
