@@ -1,157 +1,135 @@
-// The base speed per character
-time_setting = 30;
-// How much to 'sway' (random * this-many-milliseconds)
-random_setting = 100;
-// The text to use NB use \n not real life line breaks!
-input_text = "How fast can you type?";
-// Where to fill up
-target_setting = $("#output");
-// Launch that function!
-type(input_text, target_setting, 0, time_setting, random_setting);
+$(document).ready(function() {
 
-function type(input, target, current, time, random){
-  // If the current count is larger than the length of the string, then for goodness sake, stop
-	if(current > input.length){
-    // Write Complete
-		console.log("Complete.");
-	}
-	else{
-	 // console.log(current)
-    // Increment the marker
-		current += 1;
-    // fill the target with a substring, from the 0th character to the current one
-		target.text(input.substring(0,current));
-    // Wait ...
-		setTimeout(function(){
-      // do the function again, with the newly incremented marker
-			type(input, target, current, time, random);
-      // Time it the normal time, plus a random amount of sway
-		},time + Math.random()*random);
-	}
-}
+	var $wpmPrompt = $('#wpmPrompt');
+	var $wpmPromptLog = [];
+	var $wpmTest = $('#wpmTest');
+	var $wpmTestLog = [];
+	var $wpmError = $('#wpmError');
+	var $wpmErrorAll = $('#wpmErrorAll');
+	var position = -1;
+	var keyCount = 0;
+	var keyLog = [];
+	var shiftMovesLeft = 0;
+	var shiftMovesRight = 0;
+	var timeStart;
+	var errorCount = 0;
 
-/*
- * The typing test stuff
- */
+	$wpmPrompt.text("A shepherd-boy, who watched a flock of sheep near a village, brought out the villagers three or four times by crying out, 'Wolf! Wolf!' and when his neighbors came to help him, laughed at them for their pains." + "\n" + "The Wolf, however, did truly come at last. The Shepherd-boy, now really alarmed, shouted in an agony of terror: 'Pray, do come and help me; the Wolf is killing the sheep'; but no one paid any heed to his cries, nor rendered any assistance. The Wolf, having no cause of fear, at his leisure lacerated or destroyed the whole flock." + "\n" + "There is no believing a liar, even when he speaks the truth.");
+	var $wpmPromptLength = $wpmPrompt.text().length;
 
-var character_length = 31;
-var index = 0;
-var letters =  $("#input_text").val();
-var started = false;
-var current_string = letters.substring(index, index + character_length);
+	// configure accuracy forumla
+	function accuracy() {
+		var accRaw = 100 * ($wpmPromptLength / ($wpmPromptLength + errorCount));
+		var acc = accRaw.toFixed(2);
+		return acc + "%";
+	};
 
-var wordcount = 0;
+	$wpmTest.keypress(function(e) {
+		var keyValue = String.fromCharCode(e.which);
 
-$("html, body").click(function(){
-  $("#textarea").focus();
-});
+		// add e.keydown to log, if not enter
+		if(!keyLog[13]) {
+			position++;
+			keyCount++;
+			$wpmTestLog.splice(position, 0, keyValue);
+			$wpmPromptLog.splice(position, 0, $wpmPrompt.text().charAt(position));
+		};
 
-$("#target").text(current_string);
-$(window).keypress(function(evt){
-  if(!started){
-    start();
-    started = true;
-  }
-  evt = evt || window.event;
-  var charCode = evt.which || evt.keyCode;
-  var charTyped = String.fromCharCode(charCode);
-  if(charTyped == letters.charAt(index)){
-    if(charTyped == " "){
-      wordcount ++;
-      $("#wordcount").text(wordcount);
-    }
-    index ++;
-    current_string = letters.substring(index, index + character_length);
-    $("#target").text(current_string);
-    $("#your-attempt").append(charTyped);
-    if(index == letters.length){
-      wordcount ++;
-      $("#wordcount").text(wordcount);
-      $("#timer").text(timer);
-      if(timer == 0){
-        timer = 1;
-      }
-      wpm = Math.round(wordcount / (timer / 60));
-      $("#wpm").text(wpm);
-      stop();
-      finished();
-    }
-  }else{
-    $("#your-attempt").append("<span class='wrong'>" + charTyped + "</span>");
-    errors ++;
-    $("#errors").text(errors);
-  }
-});
+		// any errors? true/false
+		var correctAll = true;
+		for (var i = 0; i <= position; i++) {
+			if($wpmTestLog[i] !== $wpmPromptLog[i]) {
+				correctAll = false;
+				break;
+			};
+		};
 
-var timer = 0;
-var wpm = 0;
-var errors = 0;
-var interval_timer;
+		if($wpmTestLog[position] !== $wpmPromptLog[position]) {
+			errorCount++;
+		}
 
-$("#reset").click(function(){
-  reset();
-});
+		// console.log("No errors present: " + correctAll);
+		if(correctAll) {
+			$wpmErrorAll.html("You're doing well." + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
+		} else if(!correctAll) {
+			$wpmErrorAll.html("Oh, no. There's an error somewhere."  + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
+		};
+	});
 
-$("#change").click(function(){
-  $("#input_text").show().focus();
-});
+	$wpmTest.keydown(function(e) {
+		// is shift pressed?
+		keyLog[e.which] = true;
 
-$("#pause").click(function(){
-  stop();
-});
+		// backspace, delete "46"
+		if(e.which === 8 && (position > -1) && (shiftMovesLeft === 0 && shiftMovesRight === 0)) {
+			position--;
+			$wpmTestLog.splice(position + 1, 1);
+			$wpmPromptLog.splice(position + 1, 1);
+		} else if(e.which === 8 && (position > -1) && (shiftMovesLeft > 0)) {
+			$wpmTestLog.splice(position + 1, shiftMovesLeft);
+			$wpmPromptLog.splice(position + 1, shiftMovesLeft);
+			shiftMovesLeft = 0;
+		} else if(e.which === 8 && (position > -1) && (shiftMovesRight > 0)) {
+			$wpmTestLog.splice(position + 1, shiftMovesRight);
+			$wpmPromptLog.splice(position + 1, shiftMovesRight);
+			shiftMovesRight = 0;
+		};
 
-$("#input_text").change(function(){
-  reset();
-});
+		// left arrow key: don't extend array
+		if(e.which === 37 && (position >= -1)) {
+			position--;
+			shiftMovesRight = 0;
+		};
 
-function start(){
-  interval_timer = setInterval(function(){
-    timer ++;
-    $("#timer").text(timer);
-    wpm = Math.round(wordcount / (timer / 60));
-    $("#wpm").text(wpm);
-  }, 1000)
-}
+		// right arrow key: don't extend array
+		if(e.which === 39 && position < ($wpmTestLog.length - 1)) {
+			position++;
+			shiftMovesLeft = 0;
+		};
+	});
 
-function stop(){
-  clearInterval(interval_timer);
-  started = false;
-}
+	$wpmTest.keyup(function(e) {
+		// shift + left arrow key
+		if(keyLog[16] && keyLog[37] && (position >= -1)) {
+			shiftMovesLeft++;
+		}
 
-function reset(){
-  $("#input_text").blur().hide();;
-  $("#your-attempt").text("");
-  index = 0;
-  errors = 0;
-  clearInterval(interval_timer);
-  started = false;
-  letters = $("#input_text").val();
-  $("#wpm").text("0");
-  $("#timer").text("0");
-  $("#wordcount").text("0");
-  timer = 0;
-  wpm = 0;
-  current_string = letters.substring(index, index + character_length);
-  $("#target").text(current_string);
-}
+		// shift + right arrow key
+		if(keyLog[16] && keyLog[39] && ($wpmTestLog.length - 1)) {
+			shiftMovesRight++;
+		}
 
-function finished(){
-  alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
-}
+		// if keyCount === 1, begin timer
+		if(keyCount === 1) {
+			timeStart = Date.now();
+		};
 
-var window_focus;
+		// on enter: complete at end
+		if(keyLog[13] && ($wpmPromptLog.length >= $wpmPromptLength)) {
+			var elapsed = (Date.now() - timeStart) / 1000;
+			$wpmTest.attr("disabled", "disabled");
 
-$(window).focus(function() {
-    window_focus = true;
-}).blur(function() {
-  window_focus = false;
-});
+			function wpm() {
+				var wpmUnadjustedRaw = ($wpmPromptLength / 5) * (60 / elapsed);
+				var wpmUnadjusted = wpmUnadjustedRaw.toFixed(1);
+				return wpmUnadjusted;
+			};
 
-$(document).ready(function(){
-  if(window_focus){
-    $("#focus").hide();
-  }
-  $(window).focus(function() {
-    $("#focus").hide();
-  });
+			function wpmNet() {
+				var wpmAdjustedRaw = (($wpmPromptLength - errorCount) / 5) * (60 / elapsed);
+				var wpmAdjusted = wpmAdjustedRaw.toFixed(1);
+				return wpmAdjusted;
+			};
+
+			if(wpm() !== wpmNet()) {
+				alert("You've completed the test with a WPM of " + wpm() + " (adjusted to " + wpmNet() + ").");
+			} else {
+				alert("You've completed the test with a WPM of " + wpm() + ".");
+			}
+		}
+
+		// on keyup, remove key from array
+		keyLog[e.which] = false;
+	});
+
 });
