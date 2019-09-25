@@ -110,7 +110,7 @@ $(document).ready(function(){
 		ctx.fillText(score_text, 5, h-5);
 	}
 	
-	//Lets first create a generic function to paint cells
+	// Lets first create a generic function to paint cells
 	function paint_cell(x, y) {
 		ctx.fillStyle = "blue";
 		ctx.fillRect(x*cw, y*cw, cw, cw);
@@ -127,7 +127,7 @@ $(document).ready(function(){
 		}
 		return false;
 	}
-	//Lets add the keyboard controls now
+	// Accept HID inputs
 	$(document).keydown(function(e){
 		var key = e.which;
 		//We will add another clause to prevent reverse gear
@@ -135,6 +135,5 @@ $(document).ready(function(){
 		else if(key == "38" && d != "down") d = "up";
 		else if(key == "39" && d != "left") d = "right";
 		else if(key == "40" && d != "up") d = "down";
-		//The snake is now keyboard controllable
 	})
 })
