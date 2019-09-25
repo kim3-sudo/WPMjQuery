@@ -2,32 +2,13 @@
 	box-sizing: border-box;
 }
 
-.idolatry {
-	background-image: url(../img/me-supergrin.jpg);
-	background-size: cover;
-	height: 150px;
-	width: 150px;
-	border-radius: 75px;
-	border: 3px solid #888;
-	margin: 0 auto 1rem auto;
-	box-shadow: 0px 0px 5px #333333;
-	transition-duration: 1.5s;
-}
-
-.idolatry:hover,
-.idolatry:focus {
-	border: 1px solid #bfbfbf;
-	box-shadow: 1px 1px 63px #ffffff;
-	transition-duration: 1.5s;
-}
-
 .contains-btn {
-	text-align: center;
+	text-align: left;
 }
 
 .btn {
 	display: inline-block;
-	text-align: center;
+	text-align: left;
 	color: #ffffff;
 	border: 1px solid #ffffff;
 	padding: 0.5rem 1.5rem;
@@ -41,13 +22,10 @@
 
 .btn:hover,
 .btn:focus {
-	background-color: #47699c;
-	transition-duration: 1.5s;
+	transition-duration: 0.5s;
 }
 
 .lead-in {
-	text-align: center;
-	background-color: #4d71a7;
 	color: #ffffff;
 	font-size: 80%;
 }
@@ -62,7 +40,7 @@
 
 .define {
 	width: 75%;
-	border-bottom: 1px solid #3a3a3a;
+	border-bottom: 1px solid #ffffff;
 	padding: 0;
 	margin: 0 auto;
 }
@@ -95,8 +73,7 @@
 }
 
 .wpm {
-	background-color: #4d71a7;
-	text-align: center;
+	text-align: left;
 }
 
 #wpmPrompt {
@@ -118,8 +95,7 @@
 #wpmDone {
 	width: 10em;
 	font-size: 80%;
-	background-color: #6082b6;
-	text-align: center;
+	text-align: left;
 	border-radius: 5px;
 	padding: 0.5em;
 	margin: 0 auto;
@@ -163,8 +139,6 @@ a {
 }
 
 body {
-	background-color: #333333;
-	color: #f0f0f0;
 	font-family: 'open sans';
 	line-height: 1.25;
 }
@@ -174,7 +148,7 @@ nav {
 	font-size: 70%;
 	padding-bottom: 0;
 	margin: 0 auto;
-	text-align: center;
+	text-align: left;
 }
 
 nav h1 a,
@@ -185,10 +159,9 @@ nav h1 a:focus  {
 }
 
 header {
-	background-color: #6082b6;
 	color: #ffffff;
 	font-family: 'open sans';
-	text-align: center;
+	text-align: left;
 }
 
 footer {
@@ -196,18 +169,18 @@ footer {
 	line-height: 1.5;
 	padding-bottom: 3rem;
 	margin: 0 auto;
-	text-align: center;
+	text-align: left;
 }
 
 @media all and (max-width:950px) {
 	body {font-size:90%;}
-	.define h2 {text-align: center;}
+	.define h2 {text-align: left;}
 	.define ul {padding: 0; display: block; margin:0 auto;}
 /*	.define ul::after {content: '\0020\2022';}*/
 	.define li {display: inline-block;}
 	.define li:first-child::before {content: '';}
 	.define li::before {content: '\2022\0020';}
-	.split-40 {width: 100%; text-align: center;}
+	.split-40 {width: 100%; text-align: left;}
 	.split-60 {width: 100%;}
 }
 
