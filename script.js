@@ -14,7 +14,7 @@ $(document).ready(function() {
 	var timeStart;
 	var errorCount = 0;
 
-	$wpmPrompt.text("So she went into the garden to cut a cabbage leaf to make an apple pie; and at the same time a great she-bear coming up the street pops its head into the shop. "What! No soap? So he died, and she very imprudently married the barber; and there were present the Picninnies, and the Grand Panjandrum himself, with the little round button at the top, and they all fell to playing the game of catch as catch can, till the gunpowder ran out at the heels of their boots.");
+	$wpmPrompt.text("So she went into the garden to cut a cabbage leaf to make an apple pie; and at the same time a great she-bear coming up the street pops its head into the shop. \"What! No soap?\" So he died, and she very imprudently married the barber; and there were present the Picninnies, and the Grand Panjandrum himself, with the little round button at the top, and they all fell to playing the game of catch as catch can, till the gunpowder ran out at the heels of their boots.");
 	var $wpmPromptLength = $wpmPrompt.text().length;
 
 	// configure accuracy forumla
@@ -50,9 +50,9 @@ $(document).ready(function() {
 
 		// console.log("No errors present: " + correctAll);
 		if(correctAll) {
-			$wpmErrorAll.html("Good so far..." + "<br><br>" + "Total errors: + errorCount + "<br>" + "Accuracy: " + accuracy());
+			$wpmErrorAll.html("You're doing well." + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
 		} else if(!correctAll) {
-			$wpmErrorAll.html("Oops! You've made an error somewhere!."  + "<br><br>" + "Total errors: " + errorCount + "<br>" + "Accuracy: " + accuracy());
+			$wpmErrorAll.html("Oh, no. There's an error somewhere."  + "<br><br>" + "<strong>Total errors: </strong>" + errorCount + "<br>" + "<strong>Accuracy: </strong>" + accuracy());
 		};
 	});
 
@@ -131,4 +131,5 @@ $(document).ready(function() {
 		// on keyup, remove key from array
 		keyLog[e.which] = false;
 	});
+
 });
