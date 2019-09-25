@@ -14,7 +14,7 @@ $(document).ready(function() {
 	var timeStart;
 	var errorCount = 0;
 
-	$wpmPrompt.text("A shepherd-boy, who watched a flock of sheep near a village, brought out the villagers three or four times by crying out, 'Wolf! Wolf!' and when his neighbors came to help him, laughed at them for their pains." + "\n" + "The Wolf, however, did truly come at last. The Shepherd-boy, now really alarmed, shouted in an agony of terror: 'Pray, do come and help me; the Wolf is killing the sheep'; but no one paid any heed to his cries, nor rendered any assistance. The Wolf, having no cause of fear, at his leisure lacerated or destroyed the whole flock." + "\n" + "There is no believing a liar, even when he speaks the truth.");
+	$wpmPrompt.text("So she went into the garden to cut a cabbage leaf to make an apple pie; and at the same time a great she-bear coming up the street pops its head into the sho. "What! No soap? So he died, and she very imprudently married the barber; and there were present the Picninnies, and the Grand Panjandrum himself, with the little round button at the top, and they all fell to playing the game of catch as catch can, till the gunpowder ran out at the heels of their boots.");
 	var $wpmPromptLength = $wpmPrompt.text().length;
 
 	// configure accuracy forumla
